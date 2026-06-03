@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ConsulFin Angola</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#C9A84C;
+  --gold2:#F0D080;
+  --red:#B92B1A;
+  --black:#080808;
+  --dark:#111111;
+  --dark2:#1A1A1A;
+  --dark3:#252525;
+  --white:#FFFFFF;
+  --muted:#888888;
+  --muted2:#BBBBBB;
+  --font-serif:'Cormorant Garamond',serif;
+  --font-sans:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{background:var(--black);color:var(--white);font-family:var(--font-sans);overflow-x:hidden}
+
+/* ===== NAV ===== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  padding:1.2rem 5%;
+  display:flex;align-items:center;justify-content:space-between;
+  background:transparent;
+  transition:all 0.4s;
+}
+nav.scrolled{
+  background:rgba(8,8,8,0.96);
+  border-bottom:1px solid rgba(201,168,76,0.15);
+  backdrop-filter:blur(12px);
+  padding:0.9rem 5%;
+}
+.logo-wrap{display:flex;align-items:center;gap:14px}
+.logo-icon{
+  width:42px;height:42px;
+  background:linear-gradient(135deg,var(--gold),var(--red));
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-serif);font-size:15px;font-weight:700;color:#fff;
+  letter-spacing:-0.5px;
+  flex-shrink:0;
+}
+.logo-text{font-family:var(--font-serif);font-size:1.4rem;font-weight:600;color:var(--white);letter-spacing:0.02em}
+.logo-text span{color:var(--gold)}
+.logo-sub{font-size:0.65rem;letter-spacing:0.18em;color:var(--muted);text-transform:uppercase;margin-top:-3px}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{color:rgba(255,255,255,0.75);text-decoration:none;font-size:0.8rem;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{
+  background:transparent;border:1px solid var(--gold);
+  color:var(--gold);padding:0.65rem 1.6rem;
+  border-radius:4px;font-size:0.78rem;font-weight:500;
+  letter-spacing:0.1em;text-decoration:none;text-transform:uppercase;
+  transition:all 0.25s;
+}
+.nav-cta:hover{background:var(--gold);color:var(--black)}
+
+/* ===== HERO ===== */
+.hero{
+  min-height:100vh;display:flex;align-items:stretch;
+  position:relative;overflow:hidden;
+}
+.hero-left{
+  width:55%;display:flex;flex-direction:column;
+  justify-content:center;padding:10rem 5% 5rem 8%;
+  position:relative;z-index:2;
+}
+.hero-right{
+  width:45%;position:relative;overflow:hidden;
+  clip-path:polygon(6% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+.hero-right::after{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(to right, var(--black) 0%, transparent 40%),
+             linear-gradient(to top, var(--black) 0%, transparent 30%);
+}
+.hero-img{
+  width:100%;height:100%;object-fit:cover;object-position:center top;
+  filter:grayscale(20%) contrast(1.05);
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 30% 60%,rgba(201,168,76,0.06) 0%,transparent 70%);
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  margin-bottom:1.8rem;
+  font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);
+}
+.hero-eyebrow::before{content:'';width:30px;height:1px;background:var(--gold)}
+h1.hero-title{
+  font-family:var(--font-serif);
+  font-size:clamp(2.8rem,5vw,4.5rem);
+  font-weight:600;line-height:1.1;
+  margin-bottom:1.6rem;color:var(--white);
+}
+h1.hero-title em{font-style:normal;color:var(--gold)}
+.hero-desc{
+  font-size:1rem;color:var(--muted2);line-height:1.85;
+  max-width:480px;margin-bottom:2.5rem;font-weight:300;
+}
+.hero-actions{display:flex;gap:1.2rem;flex-wrap:wrap;margin-bottom:3.5rem}
+.btn-primary{
+  background:var(--gold);color:var(--black);
+  padding:0.95rem 2.2rem;border-radius:4px;
+  font-size:0.82rem;font-weight:600;letter-spacing:0.1em;
+  text-decoration:none;text-transform:uppercase;
+  transition:all 0.25s;border:none;cursor:pointer;
+}
+.btn-primary:hover{background:var(--gold2);transform:translateY(-2px)}
+.btn-secondary{
+  border:1px solid rgba(201,168,76,0.4);color:rgba(255,255,255,0.8);
+  padding:0.95rem 2.2rem;border-radius:4px;
+  font-size:0.82rem;font-weight:400;letter-spacing:0.1em;
+  text-decoration:none;text-transform:uppercase;
+  transition:all 0.25s;
+}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold)}
+.hero-stats{display:flex;gap:3rem}
+.stat-item{}
+.stat-num{font-family:var(--font-serif);font-size:2.5rem;font-weight:600;color:var(--gold);line-height:1}
+.stat-label{font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-top:5px}
+
+/* ===== SCROLL LINE ===== */
+.scroll-indicator{
+  position:absolute;bottom:2.5rem;left:8%;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  z-index:3;
+}
+.scroll-indicator span{font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted)}
+.scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scroll-anim 2s ease-in-out infinite}
+@keyframes scroll-anim{0%,100%{transform:scaleY(1);opacity:1}50%{transform:scaleY(0.6);opacity:0.4}}
+
+/* ===== SECTIONS ===== */
+section{padding:6rem 5%}
+.eyebrow{
+  font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:0.8rem;display:flex;align-items:center;gap:10px;
+}
+.eyebrow::before{content:'';width:25px;height:1px;background:var(--gold)}
+h2.section-title{
+  font-family:var(--font-serif);font-size:clamp(1.8rem,3.5vw,3rem);
+  font-weight:600;line-height:1.2;margin-bottom:0.6rem;color:var(--white);
+}
+h2.section-title em{font-style:normal;color:var(--gold)}
+.section-sub{font-size:0.92rem;color:var(--muted2);line-height:1.8;max-width:600px;font-weight:300}
+.section-divider{width:60px;height:1px;background:linear-gradient(to right,var(--gold),transparent);margin:1.5rem 0}
+
+/* ===== SOBRE / BIO ===== */
+.about{background:var(--dark);position:relative;overflow:hidden}
+.about::before{
+  content:'';position:absolute;
+  top:-200px;right:-100px;
+  width:500px;height:500px;
+  background:radial-gradient(circle,rgba(201,168,76,0.04) 0%,transparent 70%);
+}
+.about-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.about-img-wrap{position:relative}
+.about-portrait{
+  width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;
+  border-radius:2px;filter:grayscale(15%);
+}
+.about-frame{
+  position:absolute;top:-16px;left:-16px;right:16px;bottom:16px;
+  border:1px solid rgba(201,168,76,0.3);border-radius:2px;z-index:-1;
+}
+.about-badge{
+  position:absolute;bottom:-1.5rem;right:-1.5rem;
+  background:var(--gold);padding:1.5rem;border-radius:2px;text-align:center;
+  min-width:100px;
+}
+.about-badge .num{font-family:var(--font-serif);font-size:2.5rem;font-weight:700;color:var(--black);line-height:1}
+.about-badge .label{font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(0,0,0,0.7);margin-top:4px}
+.about-text h2{margin-bottom:1.5rem}
+.about-text p{font-size:0.92rem;color:var(--muted2);line-height:1.9;font-weight:300;margin-bottom:1.2rem}
+.about-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:1.5rem}
+.chip{padding:6px 14px;border:1px solid rgba(201,168,76,0.2);border-radius:100px;font-size:0.75rem;color:var(--muted2);letter-spacing:0.04em}
+
+/* ===== SERVIÇOS ===== */
+.services{background:var(--black)}
+.services-header{text-align:center;max-width:700px;margin:0 auto 4rem}
+.services-header .section-divider{margin:1.5rem auto}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(201,168,76,0.08);max-width:1100px;margin:0 auto}
+.svc-card{
+  background:var(--dark);padding:2.2rem;
+  transition:all 0.3s;cursor:default;position:relative;overflow:hidden;
+}
+.svc-card::before{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(to right,var(--gold),var(--red));
+  transform:scaleX(0);transition:transform 0.35s;transform-origin:left;
+}
+.svc-card:hover{background:var(--dark2)}
+.svc-card:hover::before{transform:scaleX(1)}
+.svc-num{
+  font-family:var(--font-serif);font-size:2.5rem;font-weight:700;
+  color:rgba(201,168,76,0.12);line-height:1;margin-bottom:1rem;
+}
+.svc-icon{font-size:1.4rem;margin-bottom:1rem}
+.svc-title{font-family:var(--font-serif);font-size:1.15rem;font-weight:600;margin-bottom:0.7rem;color:var(--white)}
+.svc-desc{font-size:0.82rem;color:var(--muted);line-height:1.75}
+
+/* ===== DIFERENCIAL ===== */
+.diff{background:var(--dark);padding:6rem 5%}
+.diff-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.diff-list{display:flex;flex-direction:column;gap:2rem;margin-top:2rem}
+.diff-item{display:flex;gap:1.5rem;align-items:flex-start;padding-left:0}
+.diff-bar{width:3px;background:linear-gradient(to bottom,var(--gold),transparent);align-self:stretch;flex-shrink:0}
+.diff-content h4{font-family:var(--font-serif);font-size:1.05rem;font-weight:600;color:var(--white);margin-bottom:0.4rem}
+.diff-content p{font-size:0.83rem;color:var(--muted);line-height:1.7}
+.diff-right{padding-top:1rem}
+.diff-right p{font-size:0.92rem;color:var(--muted2);line-height:1.9;font-weight:300;margin-bottom:1.5rem}
+.tech-list{display:flex;flex-direction:column;gap:12px;margin-top:1.5rem}
+.tech-item{
+  display:flex;align-items:center;gap:12px;
+  padding:1rem 1.2rem;
+  background:var(--dark2);border-left:3px solid var(--gold);
+}
+.tech-item span{font-size:0.85rem;color:var(--muted2)}
+
+/* ===== AGENDAMENTO ===== */
+.booking{background:var(--black)}
+.booking-wrap{max-width:700px;margin:0 auto;text-align:center}
+.booking-wrap p{font-size:0.92rem;color:var(--muted2);line-height:1.8;margin-bottom:2.5rem;font-weight:300}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;text-align:left;margin-bottom:1rem}
+.form-field{display:flex;flex-direction:column;gap:6px}
+.form-field.full{grid-column:1/-1}
+label.fl{font-size:0.72rem;font-weight:500;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase}
+.fi{
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
+  border-radius:3px;padding:0.8rem 1rem;color:var(--white);
+  font-family:var(--font-sans);font-size:0.88rem;
+  transition:border-color 0.2s;outline:none;
+  -webkit-appearance:none;
+}
+.fi:focus{border-color:rgba(201,168,76,0.5)}
+.fi option{background:var(--dark)}
+textarea.fi{resize:vertical;min-height:90px}
+.btn-submit{
+  width:100%;background:var(--gold);color:var(--black);
+  border:none;border-radius:3px;
+  padding:1.1rem;font-size:0.85rem;font-weight:600;
+  cursor:pointer;font-family:var(--font-sans);
+  letter-spacing:0.12em;text-transform:uppercase;
+  transition:all 0.25s;margin-top:0.5rem;
+}
+.btn-submit:hover{background:var(--gold2);transform:translateY(-2px)}
+.success-msg{
+  display:none;padding:2rem;text-align:center;
+  background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.25);
+  border-radius:3px;color:var(--gold);font-size:0.95rem;line-height:1.7;
+}
+
+/* ===== CONTATO ===== */
+.contact{background:var(--dark);border-top:1px solid rgba(201,168,76,0.1)}
+.contact-inner{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:3rem;justify-content:space-between;align-items:center}
+.contact-group{display:flex;align-items:center;gap:1rem}
+.contact-icon-wrap{
+  width:50px;height:50px;border:1px solid rgba(201,168,76,0.2);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;flex-shrink:0;
+}
+.contact-label{font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.contact-value{font-size:0.9rem;color:var(--white);font-weight:400}
+.contact-value a{color:var(--gold);text-decoration:none}
+.contact-value a:hover{text-decoration:underline}
+.qr-wrap{
+  background:white;padding:10px;border-radius:4px;
+  width:88px;height:88px;display:flex;align-items:center;justify-content:center;
+}
+
+/* ===== FOOTER ===== */
+footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.05);padding:3rem 5% 2rem}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:3rem;max-width:1100px;margin:0 auto 2.5rem}
+.footer-brand p{font-size:0.82rem;color:var(--muted);line-height:1.85;margin-top:1rem;max-width:280px;font-weight:300}
+.footer-col h5{font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.8rem}
+.footer-col ul li a{color:var(--muted);text-decoration:none;font-size:0.82rem;transition:color 0.2s}
+.footer-col ul li a:hover{color:var(--gold)}
+.footer-bottom{max-width:1100px;margin:0 auto;border-top:1px solid rgba(255,255,255,0.05);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-bottom p{font-size:0.72rem;color:var(--muted)}
+.flag-row{display:flex;gap:5px;align-items:center}
+.fb{width:16px;height:3px;border-radius:2px}
+
+/* ===== WAB FAB ===== */
+.wab{
+  position:fixed;bottom:2rem;right:2rem;z-index:300;
+  width:58px;height:58px;background:#25D366;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:1.6rem;box-shadow:0 4px 20px rgba(37,211,102,0.4);
+  cursor:pointer;transition:transform 0.2s;text-decoration:none;
+}
+.wab:hover{transform:scale(1.12)}
+
+/* ===== SCROLL ANIMATIONS ===== */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(40px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+
+/* Stagger delays */
+.delay-1{transition-delay:0.1s}
+.delay-2{transition-delay:0.2s}
+.delay-3{transition-delay:0.3s}
+.delay-4{transition-delay:0.4s}
+.delay-5{transition-delay:0.5s}
+.delay-6{transition-delay:0.6s}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="logo-wrap">
+    <div class="logo-icon">CF</div>
+    <div>
+      <div class="logo-text">Consul<span>Fin</span></div>
+      <div class="logo-sub">Angola</div>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#diferenciais">Diferenciais</a></li>
+    <li><a href="#agendamento">Consulta</a></li>
+  </ul>
+  <a href="#agendamento" class="nav-cta">Agendar</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-left">
+    <div class="hero-eyebrow">Academia &amp; Consultoria Financeira · Benguela, Angola</div>
+    <h1 class="hero-title">
+      Transformamos<br>as suas finanças<br>em <em>resultados reais</em>
+    </h1>
+    <p class="hero-desc">Ajudamos empresas e empreendedores a aumentar o lucro, controlar desperdícios e tomar decisões financeiras com precisão estratégica.</p>
+    <div class="hero-actions">
+      <a href="#agendamento" class="btn-primary">Agendar Consulta Gratuita</a>
+      <a href="#servicos" class="btn-secondary">Conhecer Serviços</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">+200</div>
+        <div class="stat-label">Clientes Atendidos</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">98%</div>
+        <div class="stat-label">Satisfação</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">7+</div>
+        <div class="stat-label">Serviços</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img
+      class="hero-img"
+      src="https://images.unsplash.com/photo-1573497491765-dccce02b29df?w=900&q=80"
+      alt="Consultor ConsulFin Angola"
+      onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'800\'%3E%3Crect fill=\'%23111\' width=\'600\' height=\'800\'/%3E%3Ctext fill=\'%23C9A84C\' x=\'50%25\' y=\'50%25\' font-size=\'80\' text-anchor=\'middle\' dominant-baseline=\'middle\'%3ECF%3C/text%3E%3C/svg%3E'"
+    >
+  </div>
+  <div class="scroll-indicator">
+    <span>Rolar</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section class="about" id="sobre">
+  <div class="about-inner">
+    <div class="about-img-wrap reveal-left">
+      <img
+        class="about-portrait"
+        src="https://images.unsplash.com/photo-1573497491765-dccce02b29df?w=600&q=85"
+        alt="Fundador ConsulFin Angola"
+        onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'533\'%3E%3Crect fill=\'%231a1a1a\' width=\'400\' height=\'533\'/%3E%3Ctext fill=\'%23C9A84C\' x=\'50%25\' y=\'50%25\' font-size=\'60\' text-anchor=\'middle\' dominant-baseline=\'middle\'%3ECF%3C/text%3E%3C/svg%3E'"
+      >
+      <div class="about-frame"></div>
+      <div class="about-badge">
+        <div class="num">5+</div>
+        <div class="label">Anos de experiência</div>
+      </div>
+    </div>
+    <div class="about-text reveal-right">
+      <div class="eyebrow">Quem somos</div>
+      <h2 class="section-title">Especialistas em <em>Finanças Empresariais</em></h2>
+      <div class="section-divider"></div>
+      <p>A ConsulFin Angola é uma academia de educação financeira e consultoria especializada em rentabilidade e sustentabilidade financeira, localizada em Benguela, no Município dos Navegantes.</p>
+      <p>Com uma equipa de profissionais dedicados, ajudamos empresas, empreendedores e indivíduos a tomar as melhores decisões financeiras — antes, durante e depois do investimento.</p>
+      <p>O nosso diferencial está na combinação de tecnologia, conhecimento profundo do mercado angolano e um atendimento genuinamente humanizado.</p>
+      <div class="about-chips">
+        <span class="chip">🎓 Educação Financeira</span>
+        <span class="chip">📊 Consultoria Estratégica</span>
+        <span class="chip">📱 App SAIT</span>
+        <span class="chip">🌍 Actuação Nacional</span>
+        <span class="chip">💻 Consultoria Virtual</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section class="services" id="servicos">
+  <div class="services-header reveal">
+    <div class="eyebrow" style="justify-content:center">O que oferecemos</div>
+    <h2 class="section-title">Nossos <em>Serviços</em></h2>
+    <div class="section-divider"></div>
+    <p class="section-sub" style="margin:0 auto;text-align:center">Soluções financeiras completas para quem quer crescer com segurança, inteligência e sustentabilidade.</p>
+  </div>
+  <div class="services-grid">
+    <div class="svc-card reveal delay-1">
+      <div class="svc-num">01</div>
+      <div class="svc-icon">💼</div>
+      <div class="svc-title">Consultoria Financeira</div>
+      <p class="svc-desc">Análise detalhada da situação financeira da sua empresa com relatórios profissionais e estratégias de crescimento.</p>
+    </div>
+    <div class="svc-card reveal delay-2">
+      <div class="svc-num">02</div>
+      <div class="svc-icon">📊</div>
+      <div class="svc-title">Viabilidade de Investimento</div>
+      <p class="svc-desc">Avaliamos rigorosamente se o seu projecto vale a pena antes de você investir — economize tempo e dinheiro.</p>
+    </div>
+    <div class="svc-card reveal delay-3">
+      <div class="svc-num">03</div>
+      <div class="svc-icon">🎓</div>
+      <div class="svc-title">Educação Financeira</div>
+      <p class="svc-desc">Cursos presenciais e online para capacitar indivíduos, famílias e equipas com conhecimento financeiro prático.</p>
+    </div>
+    <div class="svc-card reveal delay-4">
+      <div class="svc-num">04</div>
+      <div class="svc-icon">🎤</div>
+      <div class="svc-title">Palestras &amp; Workshops</div>
+      <p class="svc-desc">Eventos corporativos e académicos sobre gestão financeira, empreendedorismo e inteligência financeira.</p>
+    </div>
+    <div class="svc-card reveal delay-5">
+      <div class="svc-num">05</div>
+      <div class="svc-icon">🧭</div>
+      <div class="svc-title">Mentoria Financeira</div>
+      <p class="svc-desc">Acompanhamento personalizado para profissionais que querem dominar as suas finanças pessoais e empresariais.</p>
+    </div>
+    <div class="svc-card reveal delay-6">
+      <div class="svc-num">06</div>
+      <div class="svc-icon">📱</div>
+      <div class="svc-title">Consultoria Virtual (SAIT)</div>
+      <p class="svc-desc">Aceda aos nossos serviços pelo aplicativo SAIT ou de forma 100% remota — tecnologia ao serviço das suas finanças.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIAIS -->
+<section class="diff" id="diferenciais">
+  <div class="diff-inner">
+    <div class="reveal-left">
+      <div class="eyebrow">Por que nos escolher</div>
+      <h2 class="section-title">Nosso <em>Diferencial</em></h2>
+      <div class="section-divider"></div>
+      <div class="diff-list">
+        <div class="diff-item">
+          <div class="diff-bar"></div>
+          <div class="diff-content">
+            <h4>Rapidez &amp; Pontualidade</h4>
+            <p>Entregamos dentro dos prazos acordados, sem atrasos ou surpresas desagradáveis.</p>
+          </div>
+        </div>
+        <div class="diff-item">
+          <div class="diff-bar"></div>
+          <div class="diff-content">
+            <h4>Relatórios Profissionais</h4>
+            <p>Documentação clara e detalhada para embasar cada decisão financeira com segurança.</p>
+          </div>
+        </div>
+        <div class="diff-item">
+          <div class="diff-bar"></div>
+          <div class="diff-content">
+            <h4>Acompanhamento Pós-Serviço</h4>
+            <p>Não abandonamos após a entrega — estamos presentes durante toda a implementação.</p>
+          </div>
+        </div>
+        <div class="diff-item">
+          <div class="diff-bar"></div>
+          <div class="diff-content">
+            <h4>Atendimento Humanizado</h4>
+            <p>Cada cliente é tratado de forma única, com empatia, atenção e cuidado genuíno.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="diff-right reveal-right">
+      <div class="eyebrow">Tecnologia</div>
+      <h2 class="section-title" style="font-size:1.8rem">Vantagens <em>Tecnológicas</em></h2>
+      <div class="section-divider"></div>
+      <p>A ConsulFin Angola nasce como uma Startup com visão nacional, combinando tecnologia e expertise financeira para atender qualquer angolano em qualquer província.</p>
+      <div class="tech-list">
+        <div class="tech-item"><span>📱</span><span>Aplicativo SAIT — gestão financeira digital</span></div>
+        <div class="tech-item"><span>🌐</span><span>Cursos Online acessíveis em todo país</span></div>
+        <div class="tech-item"><span>💻</span><span>Consultoria Virtual — sem limitação geográfica</span></div>
+        <div class="tech-item"><span>📚</span><span>E-Books e materiais de formação</span></div>
+        <div class="tech-item"><span>📲</span><span>Presença activa nas redes sociais</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENDAMENTO -->
+<section class="booking" id="agendamento">
+  <div class="booking-wrap">
+    <div class="eyebrow" style="justify-content:center">Marcar Consulta</div>
+    <h2 class="section-title">Agende a sua <em>Consulta</em></h2>
+    <div class="section-divider" style="margin:1.5rem auto"></div>
+    <p>Preencha o formulário abaixo. Entraremos em contacto em até 24 horas para confirmar o seu agendamento — presencial ou virtual.</p>
+    <div id="booking-form">
+      <div class="form-grid">
+        <div class="form-field"><label class="fl">Nome Completo</label><input class="fi" type="text" placeholder="O seu nome"></div>
+        <div class="form-field"><label class="fl">WhatsApp</label><input class="fi" type="tel" placeholder="+244 9XX XXX XXX"></div>
+        <div class="form-field"><label class="fl">E-mail</label><input class="fi" type="email" placeholder="seu@email.com"></div>
+        <div class="form-field"><label class="fl">Serviço de Interesse</label>
+          <select class="fi">
+            <option value="">Selecione um serviço</option>
+            <option>Consultoria Financeira</option>
+            <option>Análise de Viabilidade</option>
+            <option>Educação Financeira</option>
+            <option>Mentoria Financeira</option>
+            <option>Palestra / Workshop</option>
+            <option>Consultoria Virtual (SAIT)</option>
+          </select>
+        </div>
+        <div class="form-field"><label class="fl">Modalidade</label>
+          <select class="fi">
+            <option>Presencial — Benguela</option>
+            <option>Virtual / Online</option>
+          </select>
+        </div>
+        <div class="form-field"><label class="fl">Data Preferida</label><input class="fi" type="date"></div>
+        <div class="form-field full"><label class="fl">Mensagem / Contexto</label><textarea class="fi" placeholder="Descreva brevemente a sua necessidade ou situação financeira..."></textarea></div>
+      </div>
+      <button class="btn-submit" onclick="submitForm()">Enviar Pedido de Agendamento →</button>
+    </div>
+    <div class="success-msg" id="success-msg">
+      ✅ Pedido enviado com sucesso!<br>
+      <span style="font-size:0.85rem;color:var(--muted2)">Entraremos em contacto em breve pelo WhatsApp ou e-mail. Obrigado pela confiança na ConsulFin Angola.</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section class="contact" id="contato" style="padding:3.5rem 5%">
+  <div class="contact-inner">
+    <div class="contact-group">
+      <div class="contact-icon-wrap">📞</div>
+      <div>
+        <div class="contact-label">WhatsApp</div>
+        <div class="contact-value"><a href="https://wa.me/244956528386">+244 956 528 386</a></div>
+      </div>
+    </div>
+    <div class="contact-group">
+      <div class="contact-icon-wrap">📍</div>
+      <div>
+        <div class="contact-label">Localização</div>
+        <div class="contact-value">Benguela · Município dos Navegantes</div>
+      </div>
+    </div>
+    <div class="contact-group">
+      <div class="contact-icon-wrap">🌍</div>
+      <div>
+        <div class="contact-label">Actuação</div>
+        <div class="contact-value">Todo o território angolano</div>
+      </div>
+    </div>
+    <div class="contact-group">
+      <div class="contact-label" style="margin-bottom:8px">QR Code · WhatsApp</div>
+      <div class="qr-wrap">
+        <svg width="68" height="68" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <rect width="64" height="64" fill="white"/>
+          <rect x="4" y="4" width="24" height="24" fill="none" stroke="#111" stroke-width="2"/>
+          <rect x="8" y="8" width="16" height="16" fill="#111"/>
+          <rect x="36" y="4" width="24" height="24" fill="none" stroke="#111" stroke-width="2"/>
+          <rect x="40" y="8" width="16" height="16" fill="#111"/>
+          <rect x="4" y="36" width="24" height="24" fill="none" stroke="#111" stroke-width="2"/>
+          <rect x="8" y="40" width="16" height="16" fill="#111"/>
+          <rect x="36" y="36" width="4" height="4" fill="#111"/>
+          <rect x="44" y="36" width="4" height="4" fill="#111"/>
+          <rect x="52" y="36" width="8" height="4" fill="#111"/>
+          <rect x="36" y="44" width="8" height="4" fill="#111"/>
+          <rect x="48" y="44" width="4" height="4" fill="#111"/>
+          <rect x="56" y="44" width="4" height="4" fill="#111"/>
+          <rect x="36" y="52" width="4" height="8" fill="#111"/>
+          <rect x="44" y="52" width="8" height="8" fill="#111"/>
+          <rect x="56" y="52" width="4" height="4" fill="#111"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo-wrap">
+        <div class="logo-icon">CF</div>
+        <div>
+          <div class="logo-text">Consul<span>Fin</span></div>
+          <div class="logo-sub">Angola</div>
+        </div>
+      </div>
+      <p>Academia de educação financeira e consultoria especializada em rentabilidade e sustentabilidade financeira para empresas e empreendedores em Angola.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Serviços</h5>
+      <ul>
+        <li><a href="#servicos">Consultoria Financeira</a></li>
+        <li><a href="#servicos">Análise de Viabilidade</a></li>
+        <li><a href="#servicos">Educação Financeira</a></li>
+        <li><a href="#servicos">Mentoria Financeira</a></li>
+        <li><a href="#servicos">Palestras &amp; Workshops</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contacto</h5>
+      <ul>
+        <li><a href="https://wa.me/244956528386">+244 956 528 386</a></li>
+        <li><a href="#agendamento">Agendar Consulta</a></li>
+        <li><a href="#">App SAIT</a></li>
+        <li><a href="#">Cursos Online</a></li>
+        <li><a href="#">E-Books</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 ConsulFin Angola · Benguela, Município dos Navegantes · Angola 🇦🇴</p>
+    <div class="flag-row">
+      <div class="fb" style="background:#CC0000"></div>
+      <div class="fb" style="background:#000"></div>
+      <span style="font-size:0.72rem;color:var(--muted);margin-left:6px">Feito em Angola</span>
+    </div>
+  </div>
+</footer>
+
+<!-- WAB FAB -->
+<a href="https://wa.me/244956528386" class="wab" target="_blank" title="WhatsApp ConsulFin Angola">💬</a>
+
+<script>
+/* Nav scroll */
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 60) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+});
+
+/* Scroll reveal */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+
+/* Form submit */
+function submitForm() {
+  document.getElementById('booking-form').style.display = 'none';
+  document.getElementById('success-msg').style.display = 'block';
+}
+</script>
+</body>
+</html>
